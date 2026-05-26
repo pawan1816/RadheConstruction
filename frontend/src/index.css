@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+/* ========== Custom Theme ========== */
+@theme {
+  --color-gold-50: #fdf8e8;
+  --color-gold-100: #f9ecb8;
+  --color-gold-200: #f5e08a;
+  --color-gold-300: #f0d45c;
+  --color-gold-400: #e8c230;
+  --color-gold-500: #d4a853;
+  --color-gold-600: #b8892e;
+  --color-gold-700: #9a6f24;
+  --color-gold-800: #7d581f;
+  --color-gold-900: #5f4118;
+
+  --color-dark-50: #f5f5f7;
+  --color-dark-100: #e0e0e5;
+  --color-dark-200: #c1c1cb;
+  --color-dark-300: #8e8ea0;
+  --color-dark-400: #5a5a72;
+  --color-dark-500: #3d3d56;
+  --color-dark-600: #2d2d44;
+  --color-dark-700: #23233a;
+  --color-dark-800: #1a1a2e;
+  --color-dark-900: #111122;
+  --color-dark-950: #0a0a15;
+
+  --font-display: "Playfair Display", serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+
+/* ========== Base Styles ========== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========== Glassmorphism ========== */
+.glass {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-dark {
+  background: rgba(26, 26, 46, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 168, 83, 0.15);
+}
+
+/* ========== Gradient Text ========== */
+.gradient-text {
+  background: linear-gradient(135deg, #d4a853, #f0d45c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ========== Animations ========== */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212, 168, 83, 0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(212, 168, 83, 0); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-gold {
+  animation: pulse-gold 2s ease-in-out infinite;
+}
+
+/* ========== Scrollbar ========== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-dark-900);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-dark-600);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold-500);
+}
+
+/* ========== Loading Skeleton ========== */
+.skeleton {
+  background: linear-gradient(90deg, var(--color-dark-700) 25%, var(--color-dark-600) 50%, var(--color-dark-700) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
