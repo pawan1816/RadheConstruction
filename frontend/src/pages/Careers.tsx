@@ -1,6 +1,6 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaBriefcase, FaMapMarkerAlt, FaClock, FaRupeeSign, FaChevronDown, FaWhatsapp, FaEnvelope, FaCheck, FaCloudUploadAlt, FaFilePdf, FaTimes } from 'react-icons/fa';
+import { FaBriefcase, FaMapMarkerAlt, FaClock, FaRupeeSign, FaChevronDown, FaWhatsapp, FaCheck, FaCloudUploadAlt, FaFilePdf, FaTimes } from 'react-icons/fa';
 import { endpoints } from '../api';
 
 interface JobOpening {
@@ -211,17 +211,45 @@ const JOB_OPENINGS: JobOpening[] = [
 
 const departments = [...new Set(JOB_OPENINGS.map((j) => j.department))];
 
+const inputCls = 'w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-xl text-white placeholder-dark-500 focus:outline-none focus:border-gold-500 transition-colors';
+const labelCls = 'block text-white text-sm font-medium mb-2';
+
 export default function CareersPage() {
   const [expandedJob, setExpandedJob] = useState<string | null>(null);
   const [filterDept, setFilterDept] = useState('All');
+  const [showModal, setShowModal] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [resumeError, setResumeError] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
   const [form, setForm] = useState({ name: '', email: '', phone: '', position: '', message: '' });
 
   const filteredJobs = filterDept === 'All' ? JOB_OPENINGS : JOB_OPENINGS.filter((j) => j.department === filterDept);
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (showModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [showModal]);
+
+  const openModal = (position?: string) => {
+    setForm((f) => ({ ...f, position: position || f.position }));
+    setSubmitted(false);
+    setResumeFile(null);
+    setResumeError('');
+    if (fileInputRef.current) fileInputRef.current.value = '';
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -277,22 +305,17 @@ export default function CareersPage() {
             <h1 className="text-3xl sm:text-5xl font-display font-bold text-white mb-4">Build Your Career with Us</h1>
             <p className="text-dark-300 text-lg max-w-2xl mx-auto">Join Ranchi's fastest-growing construction and real estate platform. We're looking for passionate engineers, architects, designers, and professionals who want to shape the skyline of Jharkhand.</p>
             <div className="flex flex-wrap justify-center gap-6 mt-10">
-              <div className="text-center">
-                <p className="text-3xl font-display font-bold text-gold-400">50+</p>
-                <p className="text-dark-400 text-sm">Open Positions</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl font-display font-bold text-gold-400">8+</p>
-                <p className="text-dark-400 text-sm">Departments</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl font-display font-bold text-gold-400">200+</p>
-                <p className="text-dark-400 text-sm">Team Members</p>
-              </div>
-              <div className="text-center">
-                <p className="text-3xl font-display font-bold text-gold-400">Ranchi</p>
-                <p className="text-dark-400 text-sm">Headquarters</p>
-              </div>
+              {[
+                { val: '50+', label: 'Open Positions' },
+                { val: '8+', label: 'Departments' },
+                { val: '200+', label: 'Team Members' },
+                { val: 'Ranchi', label: 'Headquarters' },
+              ].map((s) => (
+                <div key={s.label} className="text-center">
+                  <p className="text-3xl font-display font-bold text-gold-400">{s.val}</p>
+                  <p className="text-dark-400 text-sm">{s.label}</p>
+                </div>
+              ))}
             </div>
           </motion.div>
         </div>
@@ -344,11 +367,10 @@ export default function CareersPage() {
                 <motion.div key={job.id} layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                   id={`job-card-${job.id}`}
                   className="bg-dark-800 border border-dark-700 rounded-2xl overflow-hidden hover:border-dark-600 transition-colors">
-                  {/* Header — always visible */}
+                  {/* Header */}
                   <button onClick={() => {
                       const expanding = expandedJob !== job.id;
                       setExpandedJob(expanding ? job.id : null);
-                      // Scroll the card into view after expanding so title stays visible
                       if (expanding) {
                         setTimeout(() => {
                           document.getElementById(`job-card-${job.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -364,21 +386,20 @@ export default function CareersPage() {
                         <span className="flex items-center gap-1"><FaRupeeSign className="text-gold-500" /> {job.salary}</span>
                       </div>
                     </div>
-                    <FaChevronDown className={`text-dark-400 transition-transform ${expandedJob === job.id ? 'rotate-180' : ''}`} />
+                    <FaChevronDown className={`text-dark-400 transition-transform flex-shrink-0 ml-4 ${expandedJob === job.id ? 'rotate-180' : ''}`} />
                   </button>
 
                   {/* Expanded details */}
                   <AnimatePresence>
                     {expandedJob === job.id && (
-                      <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }}
-                        className="overflow-hidden">
+                      <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} className="overflow-hidden">
                         <div className="px-6 pb-6 space-y-5 border-t border-dark-700 pt-5">
                           {/* Key info bar */}
                           <div className="flex flex-wrap gap-2">
                             <span className="inline-flex items-center gap-1 px-3 py-1.5 bg-gold-500/10 border border-gold-500/20 rounded-lg text-gold-400 text-xs font-medium">
                               <FaRupeeSign className="text-xs" /> {job.salary}
                             </span>
-                            <span className="inline-flex items-center px-3 py-1.5 bg-dark-700 border border-dark-600 rounded-lg text-dark-300 text-xs font-medium">
+                            <span className="inline-flex items-center gap-1 px-3 py-1.5 bg-dark-700 border border-dark-600 rounded-lg text-dark-300 text-xs font-medium">
                               <FaClock className="text-xs" /> {job.experience}
                             </span>
                             <span className="inline-flex items-center px-3 py-1.5 bg-dark-700 border border-dark-600 rounded-lg text-dark-300 text-xs font-medium">
@@ -410,7 +431,7 @@ export default function CareersPage() {
                             </ul>
                           </div>
                           <div className="flex flex-col sm:flex-row gap-3 pt-2">
-                            <button onClick={() => { setExpandedJob(null); document.getElementById('apply-form')?.scrollIntoView({ behavior: 'smooth' }); setForm((f) => ({ ...f, position: job.title })); }}
+                            <button onClick={() => openModal(job.title)}
                               className="px-6 py-3 bg-gradient-to-r from-gold-500 to-gold-400 text-dark-900 rounded-xl font-bold hover:opacity-90 transition-opacity">
                               Apply Now
                             </button>
@@ -431,121 +452,15 @@ export default function CareersPage() {
         </div>
       </section>
 
-      {/* Application Form */}
-      <section className="py-16 bg-dark-800/50" id="apply-form">
-        <div className="max-w-2xl mx-auto px-4">
-          <h2 className="text-2xl font-display font-bold text-white text-center mb-2">Apply Now</h2>
-          <p className="text-dark-400 text-center mb-8">Fill in your details and we'll get back to you within 48 hours.</p>
-
-          {submitted ? (
-            <motion.div initial={{ scale: 0.9 }} animate={{ scale: 1 }} className="text-center py-12">
-              <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                <FaCheck className="text-green-400 text-2xl" />
-              </div>
-              <h3 className="text-xl font-display font-bold text-white mb-2">Application Received!</h3>
-              <p className="text-dark-400 mb-6">Thank you for your interest. Our HR team will review your application and contact you at <strong className="text-white">{form.email || form.phone}</strong> within 48 hours.</p>
-              <a href={`https://wa.me/916203277096?text=${encodeURIComponent('Hi, I just submitted a job application for ' + form.position + '. Name: ' + form.name)}`}
-                target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-xl font-bold hover:bg-green-500 transition-colors">
-                <FaWhatsapp /> Follow up on WhatsApp
-              </a>
-            </motion.div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-white text-sm font-medium mb-2">Full Name *</label>
-                  <input type="text" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    placeholder="Your full name" className="w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-xl text-white placeholder-dark-500 focus:outline-none focus:border-gold-500" />
-                </div>
-                <div>
-                  <label className="block text-white text-sm font-medium mb-2">Email *</label>
-                  <input type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    placeholder="you@email.com" className="w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-xl text-white placeholder-dark-500 focus:outline-none focus:border-gold-500" />
-                </div>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-white text-sm font-medium mb-2">Phone *</label>
-                  <div className="flex">
-                    <span className="inline-flex items-center px-3 bg-dark-700 border border-r-0 border-dark-700 rounded-l-xl text-dark-400 text-sm">+91</span>
-                    <input type="tel" required value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                      placeholder="7258021382" maxLength={10}
-                      className="w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-r-xl text-white placeholder-dark-500 focus:outline-none focus:border-gold-500" />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-white text-sm font-medium mb-2">Position *</label>
-                  <select required value={form.position} onChange={(e) => setForm({ ...form, position: e.target.value })}
-                    className="w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-xl text-white focus:outline-none focus:border-gold-500">
-                    <option value="">Select a position</option>
-                    {JOB_OPENINGS.map((j) => <option key={j.id} value={j.title}>{j.title}</option>)}
-                    <option value="Other">Other / General Application</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Resume Upload */}
-              <div>
-                <label className="block text-white text-sm font-medium mb-2">Resume / CV * <span className="text-dark-500 text-xs">(PDF, DOC, DOCX — max 5 MB)</span></label>
-                <input ref={fileInputRef} type="file" accept=".pdf,.doc,.docx" className="hidden" onChange={handleFileSelect} />
-                {resumeFile ? (
-                  <div className="flex items-center gap-3 p-4 bg-dark-800 border border-dark-700 rounded-xl">
-                    <FaFilePdf className="text-red-400 text-2xl flex-shrink-0" />
-                    <div className="flex-1 min-w-0">
-                      <p className="text-white text-sm truncate">{resumeFile.name}</p>
-                      <p className="text-dark-500 text-xs">{(resumeFile.size / 1024).toFixed(1)} KB</p>
-                    </div>
-                    <button type="button" onClick={() => { setResumeFile(null); if (fileInputRef.current) fileInputRef.current.value = ''; }}
-                      className="text-dark-500 hover:text-red-400 transition-colors p-1">
-                      <FaTimes />
-                    </button>
-                  </div>
-                ) : (
-                  <button type="button" onClick={() => fileInputRef.current?.click()}
-                    className="w-full p-6 border-2 border-dashed border-dark-600 rounded-xl text-center hover:border-dark-500 bg-dark-800/30 transition-colors">
-                    <FaCloudUploadAlt className="text-3xl text-dark-400 mx-auto mb-2" />
-                    <p className="text-white font-medium">Upload your resume</p>
-                    <p className="text-dark-500 text-sm mt-1">Click to browse — PDF, DOC, DOCX (max 5 MB)</p>
-                  </button>
-                )}
-                {resumeError && <p className="text-red-400 text-xs mt-1">{resumeError}</p>}
-              </div>
-
-              <div>
-                <label className="block text-white text-sm font-medium mb-2">Cover Note <span className="text-dark-500">(optional)</span></label>
-                <textarea rows={4} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })}
-                  placeholder="Tell us briefly about your experience, skills, and why you'd like to join BuildRanchi Pro."
-                  className="w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-xl text-white placeholder-dark-500 focus:outline-none focus:border-gold-500 resize-none" />
-              </div>
-              <button type="submit" disabled={submitting}
-                className="w-full py-3 bg-gradient-to-r from-gold-500 to-gold-400 text-dark-900 rounded-xl font-bold hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-2">
-                {submitting ? (
-                  <><span className="w-4 h-4 border-2 border-dark-900/30 border-t-dark-900 rounded-full animate-spin" /> Submitting…</>
-                ) : 'Submit Application'}
-              </button>
-            </form>
-          )}
-
-          <div className="mt-6 text-center">
-            <p className="text-dark-500 text-sm">Or send your resume directly to</p>
-            <a href="mailto:paikpawan18@gmail.com?subject=Job Application - BuildRanchi Pro"
-              className="inline-flex items-center gap-2 text-gold-400 font-medium mt-1 hover:text-gold-300 transition-colors text-sm">
-              <FaEnvelope /> paikpawan18@gmail.com
-            </a>
-          </div>
-        </div>
-      </section>
-
       {/* CTA */}
       <section className="py-12 bg-dark-900">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <p className="text-dark-400 text-sm">Didn't find a matching role? We're always looking for talented people.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center mt-4">
-            <a href="mailto:paikpawan18@gmail.com?subject=General Application - BuildRanchi Pro"
-              className="px-6 py-3 bg-dark-800 text-white rounded-xl font-bold hover:bg-dark-700 transition-colors border border-dark-700 flex items-center justify-center gap-2">
-              <FaEnvelope /> Send Open Application
-            </a>
+            <button onClick={() => openModal()}
+              className="px-6 py-3 bg-gradient-to-r from-gold-500 to-gold-400 text-dark-900 rounded-xl font-bold hover:opacity-90 transition-opacity">
+              Submit Open Application
+            </button>
             <a href="https://wa.me/916203277096?text=Hi, I'm interested in career opportunities at BuildRanchi Pro."
               target="_blank" rel="noopener noreferrer"
               className="px-6 py-3 bg-green-600 text-white rounded-xl font-bold hover:bg-green-500 transition-colors flex items-center justify-center gap-2">
@@ -554,6 +469,162 @@ export default function CareersPage() {
           </div>
         </div>
       </section>
+
+      {/* ═══════════ APPLICATION MODAL ═══════════ */}
+      <AnimatePresence>
+        {showModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-start justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto"
+            onClick={(e) => { if (e.target === e.currentTarget) closeModal(); }}
+          >
+            <motion.div
+              ref={modalRef}
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
+              className="relative w-full max-w-xl bg-dark-900 border border-dark-700 rounded-2xl shadow-2xl my-8 overflow-hidden"
+            >
+              {/* Modal header */}
+              <div className="flex items-center justify-between px-6 py-5 border-b border-dark-700 bg-dark-800/50">
+                <div>
+                  <h2 className="text-xl font-display font-bold text-white">
+                    {submitted ? 'Application Submitted!' : 'Apply for this Position'}
+                  </h2>
+                  {!submitted && form.position && (
+                    <p className="text-gold-400 text-sm mt-0.5">{form.position}</p>
+                  )}
+                </div>
+                <button onClick={closeModal}
+                  className="w-9 h-9 flex items-center justify-center rounded-xl bg-dark-700 text-dark-400 hover:text-white hover:bg-dark-600 transition-colors">
+                  <FaTimes />
+                </button>
+              </div>
+
+              {/* Modal body */}
+              <div className="px-6 py-6">
+                {submitted ? (
+                  /* ── Success state ── */
+                  <div className="text-center py-6">
+                    <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <FaCheck className="text-green-400 text-2xl" />
+                    </div>
+                    <p className="text-dark-300 mb-2">Thank you, <span className="text-white font-medium">{form.name}</span>!</p>
+                    <p className="text-dark-400 text-sm mb-6">Our HR team will review your application and contact you at <strong className="text-white">{form.email || form.phone}</strong> within 48 hours.</p>
+                    <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                      <button onClick={closeModal}
+                        className="px-6 py-3 bg-dark-800 text-white rounded-xl font-bold hover:bg-dark-700 transition-colors border border-dark-700">
+                        Close
+                      </button>
+                      <a href={`https://wa.me/916203277096?text=${encodeURIComponent(`Hi, I just applied for ${form.position}. Name: ${form.name}`)}`}
+                        target="_blank" rel="noopener noreferrer"
+                        className="px-6 py-3 bg-green-600 text-white rounded-xl font-bold hover:bg-green-500 transition-colors flex items-center justify-center gap-2">
+                        <FaWhatsapp /> Follow up on WhatsApp
+                      </a>
+                    </div>
+                  </div>
+                ) : (
+                  /* ── Form ── */
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className={labelCls}>Full Name *</label>
+                        <input type="text" required value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })}
+                          placeholder="Your full name" className={inputCls} />
+                      </div>
+                      <div>
+                        <label className={labelCls}>Email *</label>
+                        <input type="email" required value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })}
+                          placeholder="you@email.com" className={inputCls} />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className={labelCls}>Phone *</label>
+                        <div className="flex">
+                          <span className="inline-flex items-center px-3 bg-dark-700 border border-r-0 border-dark-700 rounded-l-xl text-dark-400 text-sm">+91</span>
+                          <input type="tel" required value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                            placeholder="7258021382" maxLength={10} className={`${inputCls} rounded-l-none`} />
+                        </div>
+                      </div>
+                      <div>
+                        <label className={labelCls}>Position *</label>
+                        <select required value={form.position} onChange={(e) => setForm({ ...form, position: e.target.value })}
+                          className="w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-xl text-white focus:outline-none focus:border-gold-500">
+                          <option value="">Select a position</option>
+                          {JOB_OPENINGS.map((j) => <option key={j.id} value={j.title}>{j.title}</option>)}
+                          <option value="Other">Other / General</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    {/* Resume Upload */}
+                    <div>
+                      <label className={labelCls}>Resume / CV * <span className="text-dark-500 text-xs">(PDF, DOC, DOCX — max 5 MB)</span></label>
+                      <input ref={fileInputRef} type="file" accept=".pdf,.doc,.docx" className="hidden" onChange={handleFileSelect} />
+                      {resumeFile ? (
+                        <div className="flex items-center gap-3 p-3 bg-dark-800 border border-dark-700 rounded-xl">
+                          <FaFilePdf className="text-red-400 text-xl flex-shrink-0" />
+                          <div className="flex-1 min-w-0">
+                            <p className="text-white text-sm truncate">{resumeFile.name}</p>
+                            <p className="text-dark-500 text-xs">{(resumeFile.size / 1024).toFixed(1)} KB</p>
+                          </div>
+                          <button type="button" onClick={() => { setResumeFile(null); if (fileInputRef.current) fileInputRef.current.value = ''; }}
+                            className="text-dark-500 hover:text-red-400 transition-colors">
+                            <FaTimes />
+                          </button>
+                        </div>
+                      ) : (
+                        <button type="button" onClick={() => fileInputRef.current?.click()}
+                          className="w-full p-5 border-2 border-dashed border-dark-600 rounded-xl text-center hover:border-dark-500 bg-dark-800/30 transition-colors">
+                          <FaCloudUploadAlt className="text-2xl text-dark-400 mx-auto mb-1" />
+                          <p className="text-white text-sm font-medium">Upload your resume</p>
+                          <p className="text-dark-500 text-xs mt-1">PDF, DOC, DOCX — max 5 MB</p>
+                        </button>
+                      )}
+                      {resumeError && <p className="text-red-400 text-xs mt-1">{resumeError}</p>}
+                    </div>
+
+                    <div>
+                      <label className={labelCls}>Cover Note <span className="text-dark-500">(optional)</span></label>
+                      <textarea rows={3} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })}
+                        placeholder="Briefly about your experience and why you'd like to join BuildRanchi Pro."
+                        className={`${inputCls} resize-none`} />
+                    </div>
+
+                    {/* Actions */}
+                    <div className="flex gap-3 pt-2">
+                      <button type="button" onClick={closeModal}
+                        className="flex-1 py-3 bg-dark-800 text-dark-300 rounded-xl font-bold hover:bg-dark-700 hover:text-white transition-colors border border-dark-700">
+                        Cancel
+                      </button>
+                      <button type="submit" disabled={submitting}
+                        className="flex-[2] py-3 bg-gradient-to-r from-gold-500 to-gold-400 text-dark-900 rounded-xl font-bold hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-2">
+                        {submitting ? (
+                          <><span className="w-4 h-4 border-2 border-dark-900/30 border-t-dark-900 rounded-full animate-spin" /> Submitting…</>
+                        ) : 'Submit Application'}
+                      </button>
+                    </div>
+                  </form>
+                )}
+              </div>
+
+              {/* Modal footer hint */}
+              {!submitted && (
+                <div className="px-6 py-3 border-t border-dark-700 bg-dark-800/30 text-center">
+                  <p className="text-dark-500 text-xs">
+                    Or email your resume to <a href="mailto:paikpawan18@gmail.com?subject=Job Application" className="text-gold-400 hover:underline">paikpawan18@gmail.com</a>
+                  </p>
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
