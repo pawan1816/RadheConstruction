@@ -77,7 +77,9 @@ export const endpoints = {
 
   // Quotations
   getQuotations: () => api.get('/quotations/'),
-  createQuotation: (data: Record<string, unknown>) => api.post('/quotations/', data),
+  createQuotation: (data: Record<string, unknown> | FormData) => api.post('/quotations/', data, {
+    headers: data instanceof FormData ? { 'Content-Type': 'multipart/form-data' } : undefined,
+  }),
 
   // Leads
   createLead: (data: Record<string, unknown>) => api.post('/leads/', data),

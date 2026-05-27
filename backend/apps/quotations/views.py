@@ -1,6 +1,8 @@
 """Quotations views."""
-from rest_framework import viewsets, status
-from rest_framework.decorators import action, permission_classes
+import os
+import uuid
+from rest_framework import viewsets, status, parsers
+from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from .models import Quotation, QuotationItem
@@ -12,6 +14,7 @@ class QuotationViewSet(viewsets.ModelViewSet):
     filterset_fields = ['user', 'service', 'status']
     search_fields = ['project_type', 'requirements']
     ordering_fields = ['created_at']
+    parser_classes = [parsers.MultiPartParser, parsers.JSONParser]
 
     def get_permissions(self):
         if self.action == 'create':
@@ -31,12 +34,60 @@ class QuotationViewSet(viewsets.ModelViewSet):
             return self.queryset
         return self.queryset.filter(user=user)
 
+    def _save_uploads(self, request, quotation):
+        """Save uploaded files and attach paths to the quotation."""
+        from django.conf import settings
+        documents = list(quotation.documents or [])
+        images = list(quotation.images or [])
+
+        doc_dir = os.path.join(settings.MEDIA_ROOT, 'quotations', str(quotation.id), 'documents')
+        img_dir = os.path.join(settings.MEDIA_ROOT, 'quotations', str(quotation.id), 'images')
+        os.makedirs(doc_dir, exist_ok=True)
+        os.makedirs(img_dir, exist_ok=True)
+
+        # Handle document files
+        doc_files = request.data.getlist('doc_files')
+        for f in doc_files:
+            ext = os.path.splitext(f.name)[1]
+            filename = f'{uuid.uuid4().hex}{ext}'
+            path = os.path.join(doc_dir, filename)
+            with open(path, 'wb+') as dest:
+                for chunk in f.chunks():
+                    dest.write(chunk)
+            documents.append({
+                'name': f.name,
+                'path': f'media/quotations/{quotation.id}/documents/{filename}',
+                'size': f.size,
+            })
+
+        # Handle image files
+        img_files = request.data.getlist('img_files')
+        for f in img_files:
+            ext = os.path.splitext(f.name)[1]
+            filename = f'{uuid.uuid4().hex}{ext}'
+            path = os.path.join(img_dir, filename)
+            with open(path, 'wb+') as dest:
+                for chunk in f.chunks():
+                    dest.write(chunk)
+            images.append({
+                'name': f.name,
+                'path': f'media/quotations/{quotation.id}/images/{filename}',
+                'size': f.size,
+            })
+
+        quotation.documents = documents
+        quotation.images = images
+        quotation.save(update_fields=['documents', 'images'])
+
     def perform_create(self, serializer):
         """Handle both authenticated and guest submissions."""
         user = self.request.user
         quotation = serializer.save(
             user=user if user.is_authenticated else self._get_admin_user()
         )
+
+        # Save any uploaded files
+        self._save_uploads(self.request, quotation)
 
         # Create a CRM lead from guest info if present
         guest_info = getattr(serializer, '_guest_info', None)
@@ -61,7 +112,7 @@ class QuotationViewSet(viewsets.ModelViewSet):
                     status='new',
                 )
             except Exception:
-                pass  # Don't fail quotation if lead creation fails
+                pass
 
     def _get_admin_user(self):
         from apps.accounts.models import User
