@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaBriefcase, FaMapMarkerAlt, FaClock, FaRupeeSign, FaChevronDown, FaWhatsapp, FaEnvelope, FaCheck } from 'react-icons/fa';
+import { FaBriefcase, FaMapMarkerAlt, FaClock, FaRupeeSign, FaChevronDown, FaWhatsapp, FaEnvelope, FaCheck, FaCloudUploadAlt, FaFilePdf, FaTimes } from 'react-icons/fa';
 import { endpoints } from '../api';
 
 interface JobOpening {
@@ -215,24 +215,51 @@ export default function CareersPage() {
   const [expandedJob, setExpandedJob] = useState<string | null>(null);
   const [filterDept, setFilterDept] = useState('All');
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [resumeError, setResumeError] = useState('');
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [form, setForm] = useState({ name: '', email: '', phone: '', position: '', message: '' });
 
   const filteredJobs = filterDept === 'All' ? JOB_OPENINGS : JOB_OPENINGS.filter((j) => j.department === filterDept);
 
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setResumeError('');
+    const allowed = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+    if (!allowed.includes(file.type)) {
+      setResumeError('Only PDF, DOC, DOCX files are accepted.');
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      setResumeError('File must be under 5 MB.');
+      return;
+    }
+    setResumeFile(file);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!resumeFile) {
+      setResumeError('Please upload your resume.');
+      return;
+    }
+    setSubmitting(true);
     try {
-      await endpoints.submitContact({
-        name: form.name,
-        email: form.email,
-        phone: form.phone,
-        subject: `Job Application: ${form.position}`,
-        message: `Careers Application\n\nPosition: ${form.position}\n\n${form.message}`,
-      });
+      const fd = new FormData();
+      fd.append('name', form.name);
+      fd.append('email', form.email);
+      fd.append('phone', form.phone);
+      fd.append('position', form.position);
+      fd.append('cover_note', form.message);
+      fd.append('resume', resumeFile);
+      await endpoints.submitApplication(fd);
       setSubmitted(true);
     } catch {
-      /* form will just show success anyway */
-      setSubmitted(true);
+      setResumeError('Something went wrong. Please try again or email your resume to paikpawan18@gmail.com');
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -439,15 +466,45 @@ export default function CareersPage() {
                   </select>
                 </div>
               </div>
+
+              {/* Resume Upload */}
+              <div>
+                <label className="block text-white text-sm font-medium mb-2">Resume / CV * <span className="text-dark-500 text-xs">(PDF, DOC, DOCX — max 5 MB)</span></label>
+                <input ref={fileInputRef} type="file" accept=".pdf,.doc,.docx" className="hidden" onChange={handleFileSelect} />
+                {resumeFile ? (
+                  <div className="flex items-center gap-3 p-4 bg-dark-800 border border-dark-700 rounded-xl">
+                    <FaFilePdf className="text-red-400 text-2xl flex-shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <p className="text-white text-sm truncate">{resumeFile.name}</p>
+                      <p className="text-dark-500 text-xs">{(resumeFile.size / 1024).toFixed(1)} KB</p>
+                    </div>
+                    <button type="button" onClick={() => { setResumeFile(null); if (fileInputRef.current) fileInputRef.current.value = ''; }}
+                      className="text-dark-500 hover:text-red-400 transition-colors p-1">
+                      <FaTimes />
+                    </button>
+                  </div>
+                ) : (
+                  <button type="button" onClick={() => fileInputRef.current?.click()}
+                    className="w-full p-6 border-2 border-dashed border-dark-600 rounded-xl text-center hover:border-dark-500 bg-dark-800/30 transition-colors">
+                    <FaCloudUploadAlt className="text-3xl text-dark-400 mx-auto mb-2" />
+                    <p className="text-white font-medium">Upload your resume</p>
+                    <p className="text-dark-500 text-sm mt-1">Click to browse — PDF, DOC, DOCX (max 5 MB)</p>
+                  </button>
+                )}
+                {resumeError && <p className="text-red-400 text-xs mt-1">{resumeError}</p>}
+              </div>
+
               <div>
                 <label className="block text-white text-sm font-medium mb-2">Cover Note <span className="text-dark-500">(optional)</span></label>
                 <textarea rows={4} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })}
                   placeholder="Tell us briefly about your experience, skills, and why you'd like to join BuildRanchi Pro."
                   className="w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-xl text-white placeholder-dark-500 focus:outline-none focus:border-gold-500 resize-none" />
               </div>
-              <button type="submit"
-                className="w-full py-3 bg-gradient-to-r from-gold-500 to-gold-400 text-dark-900 rounded-xl font-bold hover:opacity-90 transition-opacity">
-                Submit Application
+              <button type="submit" disabled={submitting}
+                className="w-full py-3 bg-gradient-to-r from-gold-500 to-gold-400 text-dark-900 rounded-xl font-bold hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-2">
+                {submitting ? (
+                  <><span className="w-4 h-4 border-2 border-dark-900/30 border-t-dark-900 rounded-full animate-spin" /> Submitting…</>
+                ) : 'Submit Application'}
               </button>
             </form>
           )}

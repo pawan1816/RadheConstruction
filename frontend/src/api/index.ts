@@ -101,4 +101,9 @@ export const endpoints = {
 
   // Chatbot
   sendChatMessage: (data: { message: string; session_id?: string }) => api.post('/chatbot/message/', data),
+
+  // Careers
+  submitApplication: (data: FormData) => api.post('/careers/', data, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  }),
 };
