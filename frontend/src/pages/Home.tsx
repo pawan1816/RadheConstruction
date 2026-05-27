@@ -247,9 +247,13 @@ function ProjectsSection() {
             >
               <Link to={`/projects/${project.slug}`} className="group block">
                 <div className="relative overflow-hidden rounded-2xl bg-dark-800 border border-dark-700/50 hover:border-gold-500/30 transition-all">
-                  {/* Project Image placeholder */}
-                  <div className="aspect-[4/3] bg-gradient-to-br from-dark-700 to-dark-800 flex items-center justify-center">
-                    <FaBuilding className="text-5xl text-dark-600 group-hover:text-gold-500/30 transition-colors" />
+                  {/* Project Image */}
+                  <div className="aspect-[4/3] bg-gradient-to-br from-dark-700 to-dark-800 flex items-center justify-center overflow-hidden">
+                    {project.thumbnail ? (
+                      <img src={project.thumbnail} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                    ) : (
+                      <FaBuilding className="text-5xl text-dark-600 group-hover:text-gold-500/30 transition-colors" />
+                    )}
                   </div>
                   {/* Status badge */}
                   <span className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold ${statusColors[project.status] || 'bg-dark-600 text-dark-300'}`}>
