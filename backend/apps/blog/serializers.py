@@ -24,6 +24,7 @@ class BlogPostListSerializer(serializers.ModelSerializer):
     author_name = serializers.CharField(source='author.get_full_name', read_only=True)
     category_name = serializers.CharField(source='category.name', read_only=True, default='')
     tags = BlogTagSerializer(many=True, read_only=True)
+    featured_image = serializers.SerializerMethodField()
 
     class Meta:
         model = BlogPost
@@ -31,11 +32,21 @@ class BlogPostListSerializer(serializers.ModelSerializer):
                   'category', 'category_name', 'tags', 'is_featured', 'published_at',
                   'views_count', 'reading_time', 'meta_title', 'meta_description']
 
+    def get_featured_image(self, obj):
+        if obj.featured_image:
+            url = obj.featured_image.url
+            if url.startswith('http'):
+                from urllib.parse import urlparse
+                url = urlparse(url).path
+            return url
+        return None
+
 
 class BlogPostDetailSerializer(serializers.ModelSerializer):
     author_name = serializers.CharField(source='author.get_full_name', read_only=True)
     category = BlogCategorySerializer(read_only=True)
     tags = BlogTagSerializer(many=True, read_only=True)
+    featured_image = serializers.SerializerMethodField()
 
     class Meta:
         model = BlogPost
@@ -43,3 +54,12 @@ class BlogPostDetailSerializer(serializers.ModelSerializer):
                   'category', 'tags', 'is_published', 'is_featured', 'published_at',
                   'meta_title', 'meta_description', 'meta_keywords', 'canonical_url',
                   'views_count', 'reading_time', 'created_at', 'updated_at']
+
+    def get_featured_image(self, obj):
+        if obj.featured_image:
+            url = obj.featured_image.url
+            if url.startswith('http'):
+                from urllib.parse import urlparse
+                url = urlparse(url).path
+            return url
+        return None

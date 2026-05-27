@@ -30,8 +30,12 @@ export default function BlogPage() {
             <motion.div key={post.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
               <Link to={`/blog/${post.slug}`} className="group block">
                 <article className="rounded-2xl bg-dark-800/50 border border-dark-700/50 hover:border-gold-500/30 overflow-hidden transition-all h-full flex flex-col">
-                  <div className="aspect-[16/9] bg-gradient-to-br from-dark-700 to-dark-800 flex items-center justify-center">
-                    <span className="text-4xl">📝</span>
+                  <div className="aspect-[16/9] bg-gradient-to-br from-dark-700 to-dark-800 flex items-center justify-center overflow-hidden">
+                    {post.featured_image ? (
+                      <img src={post.featured_image} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                    ) : (
+                      <span className="text-4xl">📝</span>
+                    )}
                   </div>
                   <div className="p-5 flex-1 flex flex-col">
                     {post.category_name && <span className="text-gold-500 text-xs font-semibold uppercase tracking-wider">{post.category_name}</span>}
