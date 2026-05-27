@@ -14,6 +14,8 @@ import QuotationPage from './pages/Quotation';
 import BlogPage from './pages/Blog';
 import ContactPage from './pages/Contact';
 import LoginPage from './pages/Login';
+import PrivacyPage from './pages/Privacy';
+import TermsPage from './pages/Terms';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -42,6 +44,8 @@ function AppLayout() {
           <Route path="/blog/:slug" element={<BlogPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
         </Routes>
       </main>
       <Footer />

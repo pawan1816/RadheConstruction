@@ -21,8 +21,8 @@ const FOOTER_LINKS = {
     { label: 'Get Free Quote', path: '/quotation' },
     { label: 'Book Consultation', path: '/booking' },
     { label: 'FAQs', path: '/contact#faqs' },
-    { label: 'Privacy Policy', path: '#' },
-    { label: 'Terms & Conditions', path: '#' },
+    { label: 'Privacy Policy', path: '/privacy' },
+    { label: 'Terms & Conditions', path: '/terms' },
   ],
 };
 
