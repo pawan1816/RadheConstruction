@@ -61,8 +61,12 @@ export default function ProjectsPage() {
             <motion.div key={project.id} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
               <Link to={`/projects/${project.slug}`} className="group block">
                 <div className="rounded-2xl bg-dark-800 border border-dark-700/50 hover:border-gold-500/30 overflow-hidden transition-all">
-                  <div className="aspect-[4/3] bg-gradient-to-br from-dark-700 to-dark-800 flex items-center justify-center">
-                    <FaBuilding className="text-5xl text-dark-600 group-hover:text-gold-500/30 transition-colors" />
+                  <div className="aspect-[4/3] bg-gradient-to-br from-dark-700 to-dark-800 flex items-center justify-center overflow-hidden">
+                    {project.thumbnail ? (
+                      <img src={project.thumbnail} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                    ) : (
+                      <FaBuilding className="text-5xl text-dark-600 group-hover:text-gold-500/30 transition-colors" />
+                    )}
                   </div>
                   <span className={`inline-block m-4 px-3 py-1 rounded-full text-xs font-semibold ${statusColors[project.status] || 'bg-dark-600 text-dark-300'}`}>
                     {project.status.charAt(0).toUpperCase() + project.status.slice(1)}

@@ -10,15 +10,39 @@ class ProjectCategorySerializer(serializers.ModelSerializer):
 
 
 class ProjectImageSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
     class Meta:
         model = ProjectImage
         fields = ['id', 'image', 'caption', 'image_type', 'sort_order']
 
+    def get_image(self, obj):
+        if obj.image:
+            url = obj.image.url
+            # Return relative path so frontend can use it through Caddy proxy
+            if url.startswith('http'):
+                # Extract path from absolute URL
+                from urllib.parse import urlparse
+                url = urlparse(url).path
+            return url
+        return None
+
 
 class ProjectProgressSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
     class Meta:
         model = ProjectProgress
         fields = ['id', 'title', 'description', 'date', 'image', 'percentage']
+
+    def get_image(self, obj):
+        if obj.image:
+            url = obj.image.url
+            if url.startswith('http'):
+                from urllib.parse import urlparse
+                url = urlparse(url).path
+            return url
+        return None
 
 
 class ProjectListSerializer(serializers.ModelSerializer):
