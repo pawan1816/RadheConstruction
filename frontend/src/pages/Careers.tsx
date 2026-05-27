@@ -342,9 +342,19 @@ export default function CareersPage() {
             <AnimatePresence>
               {filteredJobs.map((job) => (
                 <motion.div key={job.id} layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                  id={`job-card-${job.id}`}
                   className="bg-dark-800 border border-dark-700 rounded-2xl overflow-hidden hover:border-dark-600 transition-colors">
                   {/* Header — always visible */}
-                  <button onClick={() => setExpandedJob(expandedJob === job.id ? null : job.id)}
+                  <button onClick={() => {
+                      const expanding = expandedJob !== job.id;
+                      setExpandedJob(expanding ? job.id : null);
+                      // Scroll the card into view after expanding so title stays visible
+                      if (expanding) {
+                        setTimeout(() => {
+                          document.getElementById(`job-card-${job.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 100);
+                      }
+                    }}
                     className="w-full px-6 py-5 flex items-center justify-between text-left">
                     <div className="flex-1">
                       <h3 className="text-lg font-semibold text-white">{job.title}</h3>
@@ -363,9 +373,17 @@ export default function CareersPage() {
                       <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }}
                         className="overflow-hidden">
                         <div className="px-6 pb-6 space-y-5 border-t border-dark-700 pt-5">
-                          <div>
-                            <p className="text-dark-500 text-xs uppercase tracking-wider mb-1">Experience Required</p>
-                            <p className="text-dark-300 text-sm">{job.experience}</p>
+                          {/* Key info bar */}
+                          <div className="flex flex-wrap gap-2">
+                            <span className="inline-flex items-center gap-1 px-3 py-1.5 bg-gold-500/10 border border-gold-500/20 rounded-lg text-gold-400 text-xs font-medium">
+                              <FaRupeeSign className="text-xs" /> {job.salary}
+                            </span>
+                            <span className="inline-flex items-center px-3 py-1.5 bg-dark-700 border border-dark-600 rounded-lg text-dark-300 text-xs font-medium">
+                              <FaClock className="text-xs" /> {job.experience}
+                            </span>
+                            <span className="inline-flex items-center px-3 py-1.5 bg-dark-700 border border-dark-600 rounded-lg text-dark-300 text-xs font-medium">
+                              {job.type}
+                            </span>
                           </div>
                           <div>
                             <p className="text-dark-500 text-xs uppercase tracking-wider mb-2">Role Description</p>
