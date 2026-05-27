@@ -97,11 +97,11 @@ export function ServiceDetailPage() {
                 <Link to="/booking" className="block w-full py-3 bg-dark-700 text-white rounded-xl font-bold text-center hover:bg-dark-600 transition-colors flex items-center justify-center gap-2">
                   <FaCalendarAlt /> Book Consultation
                 </Link>
-                <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer"
+                <a href="https://wa.me/916203277096" target="_blank" rel="noopener noreferrer"
                   className="block w-full py-3 bg-green-600 text-white rounded-xl font-bold text-center hover:bg-green-500 transition-colors flex items-center justify-center gap-2">
                   <FaWhatsapp /> WhatsApp
                 </a>
-                <a href="tel:+919876543210"
+                <a href="tel:+917258021382"
                   className="block w-full py-3 bg-blue-600 text-white rounded-xl font-bold text-center hover:bg-blue-500 transition-colors flex items-center justify-center gap-2">
                   <FaPhone /> Call Us
                 </a>

@@ -46,15 +46,15 @@ export default function Footer() {
               Building Dreams, Constructing Reality. Premium construction and real estate services in Ranchi, Jharkhand since 2009.
             </p>
             <div className="flex flex-col gap-2 text-sm text-dark-400">
-              <a href="tel:+919876543210" className="flex items-center gap-2 hover:text-gold-400 transition-colors">
-                <FaPhone className="text-gold-500" /> +91 98765 43210
+              <a href="tel:+917258021382" className="flex items-center gap-2 hover:text-gold-400 transition-colors">
+                <FaPhone className="text-gold-500" /> +91 7258021382 / +91 6203277096
               </a>
-              <a href="mailto:info@buildranchi.com" className="flex items-center gap-2 hover:text-gold-400 transition-colors">
-                <FaEnvelope className="text-gold-500" /> info@buildranchi.com
+              <a href="mailto:paikpawan18@gmail.com" className="flex items-center gap-2 hover:text-gold-400 transition-colors">
+                <FaEnvelope className="text-gold-500" /> paikpawan18@gmail.com
               </a>
               <div className="flex items-start gap-2">
                 <FaMapMarkerAlt className="text-gold-500 mt-1" />
-                <span>Main Road, Near Firayalal Chowk, Ranchi, Jharkhand 834001</span>
+                <span>Dhurva, Ranchi, Jharkhand</span>
               </div>
             </div>
             {/* Social */}
@@ -64,7 +64,7 @@ export default function Footer() {
                   <Icon size={16} />
                 </a>
               ))}
-              <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-dark-800 hover:bg-green-600 rounded-lg flex items-center justify-center text-dark-400 hover:text-white transition-all">
+              <a href="https://wa.me/916203277096" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-dark-800 hover:bg-green-600 rounded-lg flex items-center justify-center text-dark-400 hover:text-white transition-all">
                 <FaWhatsapp size={16} />
               </a>
             </div>

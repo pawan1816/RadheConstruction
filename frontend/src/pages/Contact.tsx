@@ -32,10 +32,10 @@ export default function ContactPage() {
             <h2 className="text-2xl font-display font-bold text-white">Reach Out Directly</h2>
             <div className="space-y-6">
               {[
-                { icon: FaPhone, label: 'Phone', value: '+91 98765 43210', href: 'tel:+919876543210' },
-                { icon: FaWhatsapp, label: 'WhatsApp', value: '+91 98765 43210', href: 'https://wa.me/919876543210' },
-                { icon: FaEnvelope, label: 'Email', value: 'info@buildranchi.com', href: 'mailto:info@buildranchi.com' },
-                { icon: FaMapMarkerAlt, label: 'Office', value: 'Main Road, Near Firayalal Chowk, Ranchi, Jharkhand 834001', href: '#' },
+                { icon: FaPhone, label: 'Phone', value: '+91 7258021382', href: 'tel:+917258021382' },
+                { icon: FaWhatsapp, label: 'WhatsApp', value: '+91 6203277096', href: 'https://wa.me/916203277096' },
+                { icon: FaEnvelope, label: 'Email', value: 'paikpawan18@gmail.com', href: 'mailto:paikpawan18@gmail.com' },
+                { icon: FaMapMarkerAlt, label: 'Office', value: 'Dhurva, Ranchi, Jharkhand', href: '#' },
               ].map((item) => (
                 <a key={item.label} href={item.href} target={item.href.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer"
                   className="flex items-start gap-4 p-4 rounded-xl bg-dark-800/50 border border-dark-700/50 hover:border-gold-500/30 transition-all">

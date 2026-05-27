@@ -74,7 +74,7 @@ export default function Header() {
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-3">
             <a
-              href={getWhatsAppLink('919876543210')}
+              href={getWhatsAppLink('916203277096')}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 px-4 py-2.5 bg-green-600 hover:bg-green-500 text-white rounded-lg text-sm font-medium transition-colors"
@@ -130,7 +130,7 @@ export default function Header() {
                 Get Free Quote
               </Link>
               <a
-                href={getWhatsAppLink('919876543210')}
+                href={getWhatsAppLink('916203277096')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-2 px-5 py-3 bg-green-600 text-white rounded-xl text-center font-bold text-lg flex items-center justify-center gap-2"
@@ -145,13 +145,13 @@ export default function Header() {
       {/* Floating buttons (mobile) */}
       <div className="fixed bottom-6 right-6 z-40 flex flex-col gap-3 lg:hidden">
         <a
-          href="tel:+919876543210"
+          href="tel:+917258021382"
           className="w-14 h-14 bg-blue-600 rounded-full flex items-center justify-center shadow-lg shadow-blue-600/40 text-white"
         >
           <FaPhone size={20} />
         </a>
         <a
-          href={getWhatsAppLink('919876543210')}
+          href={getWhatsAppLink('916203277096')}
           target="_blank"
           rel="noopener noreferrer"
           className="w-14 h-14 bg-green-600 rounded-full flex items-center justify-center shadow-lg shadow-green-600/40 text-white animate-pulse-gold"

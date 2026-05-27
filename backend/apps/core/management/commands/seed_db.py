@@ -27,7 +27,7 @@ class Command(BaseCommand):
                 last_name='BuildRanchi',
                 role='admin',
                 is_verified=True,
-                phone='+91 98765 43210',
+                phone='+91 7258021382',
                 city='Ranchi',
                 state='Jharkhand',
             )
@@ -73,10 +73,10 @@ class Command(BaseCommand):
             defaults={
                 'tagline': 'Building Dreams, Constructing Reality',
                 'description': 'BuildRanchi Pro is the premier construction and real estate company in Ranchi, Jharkhand. We specialize in residential, commercial, and turnkey construction projects with over 15 years of experience serving the region.',
-                'address': 'Main Road, Near Firayalal Chowk, Ranchi, Jharkhand 834001, India',
-                'phone': '+91 98765 43210',
-                'email': 'info@buildranchi.com',
-                'whatsapp_number': '919876543210',
+                'address': 'Dhurva, Ranchi, Jharkhand, India',
+                'phone': '+91 7258021382',
+                'email': 'paikpawan18@gmail.com',
+                'whatsapp_number': '916203277096',
                 'social_links': {
                     'facebook': 'https://facebook.com/buildranchi',
                     'instagram': 'https://instagram.com/buildranchi',

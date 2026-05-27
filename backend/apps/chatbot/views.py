@@ -11,10 +11,10 @@ from .serializers import ChatSessionSerializer, ChatMessageSerializer, ChatReque
 BOT_RESPONSES = {
     'default': "Thank you for your interest in BuildRanchi Pro! I can help you with:\n\n1. Construction services\n2. Booking a consultation\n3. Getting a free quote\n4. Project inquiries\n5. Cost estimation\n\nPlease type a number or describe what you need!",
     'construction': "We offer comprehensive construction services in Ranchi including:\n- Residential Construction (₹1,800-2,500/sq.ft.)\n- Commercial Construction (₹2,200-3,500/sq.ft.)\n- Villa Construction (₹2,500-4,000/sq.ft.)\n\nWould you like to book a free consultation?",
-    'booking': "To book a consultation, please:\n1. Visit our Booking page\n2. Select your preferred date and time\n3. Choose consultation type\n4. Fill in your details\n\nOr call us directly at +91 98765 43210",
+    'booking': "To book a consultation, please:\n1. Visit our Booking page\n2. Select your preferred date and time\n3. Choose consultation type\n4. Fill in your details\n\nOr call us directly at +91 7258021382 or +91 6203277096",
     'quote': "For a free quotation, please provide:\n- Project type (Residential/Commercial)\n- Plot area (in sq.ft.)\n- Number of floors\n- Budget range\n\nOr fill our detailed quotation form!",
     'cost': "Our estimated construction costs in Ranchi:\n- Basic: ₹1,500-1,800/sq.ft.\n- Standard: ₹1,800-2,500/sq.ft.\n- Premium: ₹2,500-3,500/sq.ft.\n- Luxury: ₹3,500-5,000/sq.ft.\n\nCosts include materials, labor, and basic finishing.",
-    'contact': "You can reach us at:\n📞 Phone: +91 98765 43210\n💬 WhatsApp: +91 98765 43210\n📧 Email: info@buildranchi.com\n📍 Address: Main Road, Ranchi, Jharkhand 834001",
+    'contact': "You can reach us at:\n📞 Phone: +91 7258021382 / +91 6203277096\n💬 WhatsApp: +91 6203277096\n📧 Email: paikpawan18@gmail.com\n📍 Address: Dhurva, Ranchi, Jharkhand",
 }
 
 

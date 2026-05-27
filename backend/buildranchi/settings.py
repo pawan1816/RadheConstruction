@@ -174,6 +174,9 @@ SIMPLE_JWT = {
 CORS_ALLOWED_ORIGINS = os.getenv('CORS_ALLOWED_ORIGINS', 'http://localhost:3000').split(',')
 CORS_ALLOW_CREDENTIALS = True
 
+# CSRF Trusted Origins (needed for Django admin behind reverse proxy)
+CSRF_TRUSTED_ORIGINS = [origin for origin in CORS_ALLOWED_ORIGINS if origin.startswith('http')]
+
 # Celery Settings
 CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'redis://localhost:6379/0')
 CELERY_RESULT_BACKEND = os.getenv('CELERY_RESULT_BACKEND', 'redis://localhost:6379/0')
@@ -194,10 +197,11 @@ SPECTACULAR_SETTINGS = {
 # Site Settings
 SITE_NAME = 'BuildRanchi Pro'
 SITE_URL = os.getenv('SITE_URL', 'http://localhost:8000')
-COMPANY_PHONE = '+91 98765 43210'
-COMPANY_WHATSAPP = '919876543210'
-COMPANY_EMAIL = 'info@buildranchi.com'
-COMPANY_ADDRESS = 'Main Road, Ranchi, Jharkhand 834001, India'
+COMPANY_PHONE = '+91 7258021382'
+COMPANY_PHONE_2 = '+91 6203277096'
+COMPANY_WHATSAPP = '916203277096'
+COMPANY_EMAIL = 'paikpawan18@gmail.com'
+COMPANY_ADDRESS = 'Dhurva, Ranchi, Jharkhand, India'
 COMPANY_LAT = 23.3441
 COMPANY_LNG = 85.3096
 

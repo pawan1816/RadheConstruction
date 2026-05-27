@@ -77,7 +77,7 @@ function HeroSection() {
             Get Free Quote <FaArrowRight />
           </Link>
           <a
-            href="https://wa.me/919876543210?text=Hello! I am interested in your construction services."
+            href="https://wa.me/916203277096?text=Hello! I am interested in your construction services."
             target="_blank"
             rel="noopener noreferrer"
             className="px-8 py-4 bg-green-600 text-white rounded-xl font-bold text-lg hover:bg-green-500 transition-all flex items-center gap-2"
@@ -438,7 +438,7 @@ function CTASection() {
             Book Consultation
           </Link>
           <a
-            href="tel:+919876543210"
+            href="tel:+917258021382"
             className="px-8 py-4 bg-white/10 text-dark-900 rounded-xl font-bold text-lg hover:bg-white/20 transition-all flex items-center gap-2"
           >
             <FaPhone /> Call Now
@@ -463,15 +463,15 @@ function MapSection() {
             <div className="space-y-4 text-dark-300">
               <div className="flex items-start gap-3">
                 <FaMapMarkerAlt className="text-gold-500 mt-1 flex-shrink-0" />
-                <span>Main Road, Near Firayalal Chowk, Ranchi, Jharkhand 834001, India</span>
+                <span>Dhurva, Ranchi, Jharkhand, India</span>
               </div>
               <div className="flex items-center gap-3">
                 <FaPhone className="text-gold-500 flex-shrink-0" />
-                <a href="tel:+919876543210" className="hover:text-gold-400 transition-colors">+91 98765 43210</a>
+                <a href="tel:+917258021382" className="hover:text-gold-400 transition-colors">+91 7258021382</a>
               </div>
               <div className="flex items-center gap-3">
                 <FaWhatsapp className="text-gold-500 flex-shrink-0" />
-                <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="hover:text-gold-400 transition-colors">WhatsApp: +91 98765 43210</a>
+                <a href="https://wa.me/916203277096" target="_blank" rel="noopener noreferrer" className="hover:text-gold-400 transition-colors">WhatsApp: +91 7258021382</a>
               </div>
             </div>
             <div className="mt-6 flex gap-3">
