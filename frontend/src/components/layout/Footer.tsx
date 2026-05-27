@@ -15,7 +15,7 @@ const FOOTER_LINKS = {
     { label: 'Our Projects', path: '/projects' },
     { label: 'Blog', path: '/blog' },
     { label: 'Contact', path: '/contact' },
-    { label: 'Careers', path: '/contact' },
+    { label: 'Careers', path: '/careers' },
   ],
   'Quick Links': [
     { label: 'Get Free Quote', path: '/quotation' },

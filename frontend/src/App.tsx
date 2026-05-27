@@ -16,6 +16,7 @@ import ContactPage from './pages/Contact';
 import LoginPage from './pages/Login';
 import PrivacyPage from './pages/Privacy';
 import TermsPage from './pages/Terms';
+import CareersPage from './pages/Careers';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -46,6 +47,7 @@ function AppLayout() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/privacy" element={<PrivacyPage />} />
           <Route path="/terms" element={<TermsPage />} />
+          <Route path="/careers" element={<CareersPage />} />
         </Routes>
       </main>
       <Footer />
