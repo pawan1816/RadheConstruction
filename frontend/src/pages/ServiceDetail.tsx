@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
 import { Link, useParams } from 'react-router-dom';
-import { FaCheck, FaArrowRight, FaPhone, FaWhatsapp, FaCalendarAlt } from 'react-icons/fa';
+import { FaCheck, FaPhone, FaWhatsapp, FaCalendarAlt } from 'react-icons/fa';
 import { endpoints } from '../api';
 import { formatCurrency } from '../utils';
-import type { Service } from '../types';
+
 
 export function ServiceDetailPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -45,7 +45,7 @@ export function ServiceDetailPage() {
               <div className="mt-10">
                 <h3 className="text-xl font-display font-bold text-white mb-4">Key Features</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {service.features.map((f) => (
+                  {service.features.map((f: string) => (
                     <div key={f} className="flex items-center gap-3 text-dark-300">
                       <FaCheck className="text-gold-500 flex-shrink-0" /> {f}
                     </div>
@@ -58,7 +58,7 @@ export function ServiceDetailPage() {
               <div className="mt-10">
                 <h3 className="text-xl font-display font-bold text-white mb-6">Our Process</h3>
                 <div className="space-y-4">
-                  {service.process_steps.map((step, i) => (
+                  {service.process_steps.map((step: { title: string; description: string }, i: number) => (
                     <div key={i} className="flex gap-4 items-start">
                       <div className="w-10 h-10 bg-gold-500/10 rounded-full flex items-center justify-center text-gold-500 font-bold flex-shrink-0">{i + 1}</div>
                       <div>
@@ -75,7 +75,7 @@ export function ServiceDetailPage() {
               <div className="mt-10">
                 <h3 className="text-xl font-display font-bold text-white mb-4">FAQs</h3>
                 <div className="space-y-3">
-                  {service.faqs.map((faq) => (
+                  {service.faqs.map((faq: { id: number; question: string; answer: string }) => (
                     <div key={faq.id} className="p-4 rounded-xl bg-dark-800/50 border border-dark-700/50">
                       <h4 className="text-white font-medium text-sm mb-2">{faq.question}</h4>
                       <p className="text-dark-400 text-sm">{faq.answer}</p>

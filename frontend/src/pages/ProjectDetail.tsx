@@ -3,7 +3,6 @@ import { useQuery } from '@tanstack/react-query';
 import { useParams, Link } from 'react-router-dom';
 import { FaMapMarkerAlt, FaCalendarAlt, FaRulerCombined, FaArrowLeft } from 'react-icons/fa';
 import { endpoints } from '../api';
-import type { Project } from '../types';
 
 export function ProjectDetailPage() {
   const { slug } = useParams<{ slug: string }>();

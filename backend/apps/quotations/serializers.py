@@ -25,12 +25,27 @@ class QuotationSerializer(serializers.ModelSerializer):
 
 
 class QuotationCreateSerializer(serializers.ModelSerializer):
+    """Accepts name/phone/email for guest submissions (stored in CRM Lead, not in Quotation model)."""
+    name = serializers.CharField(required=False, default='Guest', write_only=True)
+    phone = serializers.CharField(required=False, default='', write_only=True)
+    email = serializers.EmailField(required=False, default='', write_only=True)
+
     class Meta:
         model = Quotation
         fields = ['service', 'project_type', 'budget_range', 'area_sqft', 'floors',
-                  'rooms', 'requirements', 'documents', 'images']
+                  'rooms', 'requirements', 'documents', 'images', 'name', 'phone', 'email']
 
     def create(self, validated_data):
-        validated_data['user'] = self.context['request'].user
+        # Extract guest contact info before model save (not model fields)
+        guest_name = validated_data.pop('name', 'Guest')
+        guest_phone = validated_data.pop('phone', '')
+        guest_email = validated_data.pop('email', '')
         validated_data['status'] = 'submitted'
+
+        # Store guest info in context so perform_create can access it
+        self._guest_info = {
+            'name': guest_name,
+            'phone': guest_phone,
+            'email': guest_email,
+        }
         return super().create(validated_data)

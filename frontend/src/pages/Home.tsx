@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
 import { FaWhatsapp, FaStar, FaQuoteLeft, FaArrowRight, FaBuilding, FaHome, FaPaintBrush, FaDraftingCompass, FaHammer, FaKey, FaMapMarkerAlt, FaPhone, FaCheck, FaUsers, FaHardHat, FaCalendarAlt } from 'react-icons/fa';
 import { endpoints } from '../api';
 import { formatCurrency } from '../utils';
-import type { Service, Project, Testimonial, CompanyInfo, FAQ } from '../types';
+import type { Service, Project, Testimonial, FAQ } from '../types';
 
 const fadeInUp = {
   initial: { opacity: 0, y: 30 },
@@ -175,7 +175,7 @@ function ServicesSection() {
         </motion.div>
 
         <motion.div variants={stagger} initial="initial" whileInView="animate" viewport={{ once: true }} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.slice(0, 8).map((service, i) => (
+          {services.slice(0, 8).map((service) => (
             <motion.div key={service.id} variants={fadeInUp}>
               <Link
                 to={`/services/${service.slug}`}
@@ -190,7 +190,7 @@ function ServicesSection() {
                 <p className="text-dark-400 text-sm line-clamp-2">{service.short_description}</p>
                 {service.price_range_min && (
                   <div className="mt-3 text-gold-400 text-sm font-medium">
-                    {formatCurrency(service.price_range_min)} - {formatCurrency(service.price_range_max)} {service.price_unit}
+                    {formatCurrency(service.price_range_min!)} - {formatCurrency(service.price_range_max!)} {service.price_unit}
                   </div>
                 )}
               </Link>

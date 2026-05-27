@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
-import { FaCalendarAlt, FaUser, FaClock, FaArrowRight } from 'react-icons/fa';
+import { FaUser, FaClock } from 'react-icons/fa';
 import { endpoints } from '../api';
-import { formatDate } from '../utils';
+
 import type { BlogPost } from '../types';
 
 export default function BlogPage() {

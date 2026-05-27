@@ -104,7 +104,7 @@ export default function AboutPage() {
               { year: '2020', event: 'Completed 300+ projects across Jharkhand' },
               { year: '2023', event: 'Started turnkey and villa construction services' },
               { year: '2025', event: '500+ projects completed, 35+ engineers on team' },
-            ].map((item, i) => (
+            ].map((item) => (
               <div key={item.year} className="flex gap-4 items-start">
                 <div className="w-16 text-gold-500 font-bold font-display flex-shrink-0">{item.year}</div>
                 <div className="flex-1 pb-6 border-l-2 border-dark-700 pl-4">
