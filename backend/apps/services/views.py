@@ -13,6 +13,7 @@ class ServiceCategoryViewSet(viewsets.ReadOnlyModelViewSet):
 
 class ServiceViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Service.objects.filter(is_active=True).select_related('category')
+    lookup_field = 'slug'
     filterset_fields = ['category', 'is_featured']
     search_fields = ['name', 'short_description', 'description']
     ordering_fields = ['sort_order', 'name', 'created_at']

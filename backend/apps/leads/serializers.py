@@ -46,3 +46,9 @@ class LeadCreateSerializer(serializers.ModelSerializer):
         model = Lead
         fields = ['name', 'email', 'phone', 'source', 'service_interest', 'budget_range',
                   'location', 'message']
+        extra_kwargs = {
+            'name': {'required': False, 'default': 'Guest'},
+            'phone': {'required': False, 'default': ''},
+            'email': {'required': False, 'default': ''},
+            'source': {'required': False, 'default': 'website'},
+        }

@@ -16,6 +16,7 @@ class ProjectCategoryViewSet(viewsets.ReadOnlyModelViewSet):
 
 class ProjectViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Project.objects.filter(is_active=True).select_related('category', 'engineer').prefetch_related('images')
+    lookup_field = 'slug'
     filterset_fields = ['category', 'status', 'city', 'is_featured', 'engineer']
     search_fields = ['title', 'location', 'description']
     ordering_fields = ['created_at', 'completion_percentage']
