@@ -17,9 +17,20 @@ class FAQSerializer(serializers.ModelSerializer):
 
 
 class TeamMemberSerializer(serializers.ModelSerializer):
+    photo = serializers.SerializerMethodField()
+
     class Meta:
         model = TeamMember
         fields = ['id', 'name', 'designation', 'photo', 'bio', 'experience', 'specializations', 'social_links', 'sort_order']
+
+    def get_photo(self, obj):
+        if obj.photo:
+            url = obj.photo.url
+            if url.startswith('http'):
+                from urllib.parse import urlparse
+                url = urlparse(url).path
+            return url
+        return None
 
 
 class CompanyInfoSerializer(serializers.ModelSerializer):

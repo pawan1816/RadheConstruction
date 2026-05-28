@@ -72,17 +72,23 @@ export default function AboutPage() {
               <h2 className="text-3xl font-display font-bold text-white mt-2">Meet the Experts</h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
-              {team.map((member, i) => (
-                <motion.div key={member.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
-                  className="text-center p-6 rounded-2xl bg-dark-800/50 border border-dark-700/50">
-                  <div className="w-20 h-20 bg-gold-500/20 rounded-full flex items-center justify-center mx-auto mb-4 text-gold-500 font-bold text-2xl">
-                    {member.name.charAt(0)}
-                  </div>
-                  <h4 className="text-white font-semibold">{member.name}</h4>
-                  <p className="text-gold-400 text-sm">{member.designation}</p>
-                  <p className="text-dark-500 text-xs mt-2">{member.experience}+ years experience</p>
-                </motion.div>
-              ))}
+{team.map((member, i) => (
+	                <motion.div key={member.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
+	                  className="text-center p-6 rounded-2xl bg-dark-800/50 border border-dark-700/50 hover:border-gold-500/30 transition-colors">
+	                  <div className="w-20 h-20 mx-auto mb-4 rounded-full overflow-hidden border-2 border-gold-500/30">
+	                    {member.photo ? (
+	                      <img src={member.photo} alt={member.name} className="w-full h-full object-cover" loading="lazy" />
+	                    ) : (
+	                      <div className="w-full h-full bg-gold-500/20 flex items-center justify-center text-gold-500 font-bold text-2xl">
+	                        {member.name.charAt(0)}
+	                      </div>
+	                    )}
+	                  </div>
+	                  <h4 className="text-white font-semibold">{member.name}</h4>
+	                  <p className="text-gold-400 text-sm">{member.designation}</p>
+	                  <p className="text-dark-500 text-xs mt-2">{member.experience}+ years experience</p>
+	                </motion.div>
+	              ))}
             </div>
           </div>
         </section>
