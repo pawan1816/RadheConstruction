@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { HiMenu, HiX } from 'react-icons/hi';
 import { FaWhatsapp, FaPhone } from 'react-icons/fa';
 import { getWhatsAppLink } from '../../utils';
+import { useThemeStore } from '../../stores/themeStore';
+import ThemeToggle from '../ThemeToggle';
 
 const NAV_LINKS = [
   { label: 'Home', path: '/' },
@@ -18,6 +20,8 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const { theme } = useThemeStore();
+  const isDark = theme === 'dark';
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -29,15 +33,15 @@ export default function Header() {
     setMobileOpen(false);
   }, [location]);
 
+  const headerBg = isScrolled
+    ? isDark
+      ? 'bg-dark-900/95 backdrop-blur-lg shadow-lg shadow-dark-950/50 py-3'
+      : 'bg-white/95 backdrop-blur-lg shadow-md py-3'
+    : 'bg-transparent py-5';
+
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
-            ? 'bg-dark-900/95 backdrop-blur-lg shadow-lg shadow-dark-950/50 py-3'
-            : 'bg-transparent py-5'
-        }`}
-      >
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${headerBg}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
@@ -45,10 +49,10 @@ export default function Header() {
               B
             </div>
             <div>
-              <span className="text-xl font-bold font-display text-white">
+              <span className={`text-xl font-bold font-display ${isDark ? 'text-white' : 'text-dark-900'}`}>
                 Build<span className="text-gold-500">Ranchi</span>
               </span>
-              <span className="block text-[10px] text-gold-400 tracking-widest uppercase -mt-1">
+              <span className="block text-[10px] text-gold-500 tracking-widest uppercase -mt-1">
                 Pro Construction
               </span>
             </div>
@@ -62,8 +66,10 @@ export default function Header() {
                 to={link.path}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
                   location.pathname === link.path
-                    ? 'text-gold-400 bg-gold-500/10'
-                    : 'text-dark-300 hover:text-white hover:bg-white/5'
+                    ? 'text-gold-500 bg-gold-500/10'
+                    : isDark
+                      ? 'text-dark-300 hover:text-white hover:bg-white/5'
+                      : 'text-dark-500 hover:text-dark-900 hover:bg-dark-100'
                 }`}
               >
                 {link.label}
@@ -73,6 +79,7 @@ export default function Header() {
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-3">
+            <ThemeToggle />
             <a
               href={getWhatsAppLink('916203277096')}
               target="_blank"
@@ -91,12 +98,15 @@ export default function Header() {
           </div>
 
           {/* Mobile menu button */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="lg:hidden p-2 text-white"
-          >
-            {mobileOpen ? <HiX size={24} /> : <HiMenu size={24} />}
-          </button>
+          <div className="lg:hidden flex items-center gap-3">
+            <ThemeToggle />
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className={`p-2 ${isDark ? 'text-white' : 'text-dark-900'}`}
+            >
+              {mobileOpen ? <HiX size={24} /> : <HiMenu size={24} />}
+            </button>
+          </div>
         </div>
       </header>
 
@@ -107,7 +117,9 @@ export default function Header() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-dark-900/98 backdrop-blur-lg pt-24 px-6 lg:hidden"
+            className={`fixed inset-0 z-40 backdrop-blur-lg pt-24 px-6 lg:hidden ${
+              isDark ? 'bg-dark-900/98' : 'bg-white/98'
+            }`}
           >
             <nav className="flex flex-col gap-2">
               {NAV_LINKS.map((link) => (
@@ -116,8 +128,10 @@ export default function Header() {
                   to={link.path}
                   className={`px-4 py-3 rounded-xl text-lg font-medium transition-all ${
                     location.pathname === link.path
-                      ? 'text-gold-400 bg-gold-500/10'
-                      : 'text-white hover:bg-white/5'
+                      ? 'text-gold-500 bg-gold-500/10'
+                      : isDark
+                        ? 'text-white hover:bg-white/5'
+                        : 'text-dark-900 hover:bg-dark-50'
                   }`}
                 >
                   {link.label}

@@ -55,12 +55,29 @@ function AppLayout() {
   );
 }
 
+function ThemedToaster() {
+  const theme = document.documentElement.getAttribute('data-theme') || 'dark';
+  const isDark = theme === 'dark';
+  return (
+    <Toaster
+      position="top-right"
+      toastOptions={{
+        style: {
+          background: isDark ? '#1a1a2e' : '#ffffff',
+          color: isDark ? '#ffffff' : '#111122',
+          border: isDark ? '1px solid #23233a' : '1px solid #e0e0e5',
+        },
+      }}
+    />
+  );
+}
+
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <AppLayout />
-        <Toaster position="top-right" toastOptions={{ style: { background: '#1a1a2e', color: '#fff' } }} />
+        <ThemedToaster />
       </BrowserRouter>
     </QueryClientProvider>
   );
