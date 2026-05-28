@@ -1,0 +1,297 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "B BuildRanchi Pro Construction" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e6]: B
+        - generic [ref=e7]:
+          - generic [ref=e8]: BuildRanchi
+          - generic [ref=e9]: Pro Construction
+      - navigation [ref=e10]:
+        - link "Home" [ref=e11] [cursor=pointer]:
+          - /url: /
+        - link "About" [ref=e12] [cursor=pointer]:
+          - /url: /about
+        - link "Services" [ref=e13] [cursor=pointer]:
+          - /url: /services
+        - link "Projects" [ref=e14] [cursor=pointer]:
+          - /url: /projects
+        - link "Blog" [ref=e15] [cursor=pointer]:
+          - /url: /blog
+        - link "Contact" [ref=e16] [cursor=pointer]:
+          - /url: /contact
+      - generic [ref=e17]:
+        - link "WhatsApp" [ref=e18] [cursor=pointer]:
+          - /url: https://wa.me/916203277096?text=Hello!%20I%20am%20interested%20in%20your%20construction%20services.
+          - img [ref=e19]
+          - text: WhatsApp
+        - link "Get Free Quote" [ref=e21] [cursor=pointer]:
+          - /url: /quotation
+  - main [ref=e22]:
+    - generic [ref=e28]:
+      - generic [ref=e30]: "🏗️ Ranchi's #1 Construction Company"
+      - heading "Building Dreams, Constructing Reality" [level=1] [ref=e31]:
+        - text: Building Dreams,
+        - text: Constructing Reality
+      - paragraph [ref=e32]: Premium construction, real estate & interior design services in Ranchi, Jharkhand. From concept to completion, we bring your vision to life.
+      - generic [ref=e33]:
+        - link "Book Consultation" [ref=e34] [cursor=pointer]:
+          - /url: /booking
+          - img [ref=e35]
+          - text: Book Consultation
+        - link "Get Free Quote" [ref=e37] [cursor=pointer]:
+          - /url: /quotation
+          - text: Get Free Quote
+          - img [ref=e38]
+        - link "WhatsApp Us" [ref=e40] [cursor=pointer]:
+          - /url: https://wa.me/916203277096?text=Hello! I am interested in your construction services.
+          - img [ref=e41]
+          - text: WhatsApp Us
+    - generic [ref=e48]:
+      - generic [ref=e49]:
+        - img [ref=e50]
+        - generic [ref=e52]: 500+
+        - generic [ref=e53]: Projects Completed
+      - generic [ref=e54]:
+        - img [ref=e55]
+        - generic [ref=e57]: 450+
+        - generic [ref=e58]: Happy Clients
+      - generic [ref=e59]:
+        - img [ref=e60]
+        - generic [ref=e62]: 15+
+        - generic [ref=e63]: Years Experience
+      - generic [ref=e64]:
+        - img [ref=e65]
+        - generic [ref=e67]: 35+
+        - generic [ref=e68]: Expert Engineers
+    - generic [ref=e70]:
+      - generic [ref=e71]:
+        - text: What We Offer
+        - heading "Our Premium Services" [level=2] [ref=e72]
+        - paragraph [ref=e73]: Comprehensive construction and real estate solutions tailored for Ranchi, Jharkhand.
+      - link "View All Services" [ref=e75] [cursor=pointer]:
+        - /url: /services
+        - text: View All Services
+        - img [ref=e76]
+    - generic [ref=e79]:
+      - generic [ref=e80]:
+        - text: Our Portfolio
+        - heading "Featured Projects" [level=2] [ref=e81]
+        - paragraph [ref=e82]: Explore our signature construction projects across Ranchi and Jharkhand.
+      - link "View All Projects" [ref=e84] [cursor=pointer]:
+        - /url: /projects
+        - text: View All Projects
+        - img [ref=e85]
+    - generic [ref=e90]:
+      - heading "Ready to Build Your Dream Project?" [level=2] [ref=e91]
+      - paragraph [ref=e92]: Get a free consultation and detailed quotation for your construction project in Ranchi. Our experts are ready to help you every step of the way.
+      - generic [ref=e93]:
+        - link "Get Free Quote" [ref=e94] [cursor=pointer]:
+          - /url: /quotation
+        - link "Book Consultation" [ref=e95] [cursor=pointer]:
+          - /url: /booking
+        - link "Call Now" [ref=e96] [cursor=pointer]:
+          - /url: tel:+917258021382
+          - img [ref=e97]
+          - text: Call Now
+    - generic [ref=e100]:
+      - generic [ref=e101]:
+        - text: Testimonials
+        - heading "What Our Clients Say" [level=2] [ref=e102]
+      - generic [ref=e103]:
+        - generic [ref=e104]:
+          - img [ref=e105]
+          - paragraph [ref=e107]: Outstanding quality and delivered on time. Highly recommended!
+          - generic [ref=e108]:
+            - img [ref=e109]
+            - img [ref=e111]
+            - img [ref=e113]
+            - img [ref=e115]
+            - img [ref=e117]
+          - generic [ref=e119]:
+            - generic [ref=e120]: S
+            - generic [ref=e121]:
+              - generic [ref=e122]: Sanjay Gupta
+              - generic [ref=e123]: Business Owner
+        - generic [ref=e124]:
+          - img [ref=e125]
+          - paragraph [ref=e127]: The renovation transformed our home completely. Amazing attention to detail.
+          - generic [ref=e128]:
+            - img [ref=e129]
+            - img [ref=e131]
+            - img [ref=e133]
+            - img [ref=e135]
+            - img [ref=e137]
+          - generic [ref=e139]:
+            - generic [ref=e140]: M
+            - generic [ref=e141]:
+              - generic [ref=e142]: Meena Devi
+              - generic [ref=e143]: Retired Teacher
+        - generic [ref=e144]:
+          - img [ref=e145]
+          - paragraph [ref=e147]: Professional team, seamless experience from design to completion.
+          - generic [ref=e148]:
+            - img [ref=e149]
+            - img [ref=e151]
+            - img [ref=e153]
+            - img [ref=e155]
+            - img [ref=e157]
+          - generic [ref=e159]:
+            - generic [ref=e160]: D
+            - generic [ref=e161]:
+              - generic [ref=e162]: Dr. Rakesh Oraon
+              - generic [ref=e163]: Doctor
+    - generic [ref=e165]:
+      - generic [ref=e166]:
+        - text: Got Questions?
+        - heading "Frequently Asked Questions" [level=2] [ref=e167]
+      - generic [ref=e168]:
+        - button "What is the cost of construction in Ranchi? +" [ref=e170]:
+          - generic [ref=e171]: What is the cost of construction in Ranchi?
+          - generic [ref=e172]: +
+        - button "How long does it take to build a house? +" [ref=e174]:
+          - generic [ref=e175]: How long does it take to build a house?
+          - generic [ref=e176]: +
+        - button "Do you handle building approvals? +" [ref=e178]:
+          - generic [ref=e179]: Do you handle building approvals?
+          - generic [ref=e180]: +
+        - button "What materials do you use? +" [ref=e182]:
+          - generic [ref=e183]: What materials do you use?
+          - generic [ref=e184]: +
+    - generic [ref=e186]:
+      - generic [ref=e187]:
+        - text: Get Started
+        - heading "Quick Enquiry" [level=2] [ref=e188]
+        - paragraph [ref=e189]: Fill in your details and we'll get back to you.
+      - generic [ref=e190]:
+        - textbox "Your Name" [ref=e191]
+        - textbox "Phone Number" [ref=e192]
+        - combobox [ref=e193]:
+          - option "Select Service" [selected]
+          - option "Residential Construction"
+          - option "Commercial Construction"
+          - option "Interior Design"
+          - option "Villa Construction"
+          - option "Renovation"
+          - option "Architecture Planning"
+          - option "Turnkey Projects"
+        - textbox "Tell us about your project" [ref=e194]
+        - button "Submit Enquiry" [ref=e195]
+    - generic [ref=e198]:
+      - generic [ref=e199]:
+        - text: Visit Us
+        - heading "Our Office in Ranchi" [level=2] [ref=e200]
+        - generic [ref=e201]:
+          - generic [ref=e202]:
+            - img [ref=e203]
+            - generic [ref=e205]: Dhurva, Ranchi, Jharkhand, India
+          - generic [ref=e206]:
+            - img [ref=e207]
+            - link "+91 7258021382" [ref=e209] [cursor=pointer]:
+              - /url: tel:+917258021382
+          - generic [ref=e210]:
+            - img [ref=e211]
+            - 'link "WhatsApp: +91 7258021382" [ref=e213] [cursor=pointer]':
+              - /url: https://wa.me/916203277096
+        - generic [ref=e214]:
+          - link "Book a Visit" [ref=e215] [cursor=pointer]:
+            - /url: /booking
+          - link "Contact Us" [ref=e216] [cursor=pointer]:
+            - /url: /contact
+      - iframe [ref=e218]
+  - contentinfo [ref=e219]:
+    - generic [ref=e221]:
+      - generic [ref=e222]:
+        - link "B BuildRanchi" [ref=e223] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e224]: B
+          - generic [ref=e225]: BuildRanchi
+        - paragraph [ref=e226]: Building Dreams, Constructing Reality. Premium construction and real estate services in Ranchi, Jharkhand since 2009.
+        - generic [ref=e227]:
+          - link "+91 7258021382 / +91 6203277096" [ref=e228] [cursor=pointer]:
+            - /url: tel:+917258021382
+            - img [ref=e229]
+            - text: +91 7258021382 / +91 6203277096
+          - link "paikpawan18@gmail.com" [ref=e231] [cursor=pointer]:
+            - /url: mailto:paikpawan18@gmail.com
+            - img [ref=e232]
+            - text: paikpawan18@gmail.com
+          - generic [ref=e234]:
+            - img [ref=e235]
+            - generic [ref=e237]: Dhurva, Ranchi, Jharkhand
+        - generic [ref=e238]:
+          - link [ref=e239] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e240]
+          - link [ref=e242] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e243]
+          - link [ref=e245] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e246]
+          - link [ref=e248] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e249]
+          - link [ref=e251] [cursor=pointer]:
+            - /url: https://wa.me/916203277096
+            - img [ref=e252]
+      - generic [ref=e254]:
+        - heading "Services" [level=4] [ref=e255]
+        - list [ref=e256]:
+          - listitem [ref=e257]:
+            - link "Residential Construction" [ref=e258] [cursor=pointer]:
+              - /url: /services/residential-construction
+          - listitem [ref=e259]:
+            - link "Commercial Construction" [ref=e260] [cursor=pointer]:
+              - /url: /services/commercial-construction
+          - listitem [ref=e261]:
+            - link "Interior Design" [ref=e262] [cursor=pointer]:
+              - /url: /services/interior-design
+          - listitem [ref=e263]:
+            - link "Villa Construction" [ref=e264] [cursor=pointer]:
+              - /url: /services/villa-construction
+          - listitem [ref=e265]:
+            - link "Renovation" [ref=e266] [cursor=pointer]:
+              - /url: /services/renovation
+          - listitem [ref=e267]:
+            - link "Architecture Planning" [ref=e268] [cursor=pointer]:
+              - /url: /services/architecture-planning
+      - generic [ref=e269]:
+        - heading "Company" [level=4] [ref=e270]
+        - list [ref=e271]:
+          - listitem [ref=e272]:
+            - link "About Us" [ref=e273] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=e274]:
+            - link "Our Projects" [ref=e275] [cursor=pointer]:
+              - /url: /projects
+          - listitem [ref=e276]:
+            - link "Blog" [ref=e277] [cursor=pointer]:
+              - /url: /blog
+          - listitem [ref=e278]:
+            - link "Contact" [ref=e279] [cursor=pointer]:
+              - /url: /contact
+          - listitem [ref=e280]:
+            - link "Careers" [ref=e281] [cursor=pointer]:
+              - /url: /careers
+      - generic [ref=e282]:
+        - heading "Quick Links" [level=4] [ref=e283]
+        - list [ref=e284]:
+          - listitem [ref=e285]:
+            - link "Get Free Quote" [ref=e286] [cursor=pointer]:
+              - /url: /quotation
+          - listitem [ref=e287]:
+            - link "Book Consultation" [ref=e288] [cursor=pointer]:
+              - /url: /booking
+          - listitem [ref=e289]:
+            - link "FAQs" [ref=e290] [cursor=pointer]:
+              - /url: /contact#faqs
+          - listitem [ref=e291]:
+            - link "Privacy Policy" [ref=e292] [cursor=pointer]:
+              - /url: /privacy
+          - listitem [ref=e293]:
+            - link "Terms & Conditions" [ref=e294] [cursor=pointer]:
+              - /url: /terms
+    - generic [ref=e296]:
+      - paragraph [ref=e297]: © 2026 BuildRanchi Pro. All rights reserved.
+      - paragraph [ref=e298]: Premium Construction & Real Estate • Ranchi, Jharkhand, India

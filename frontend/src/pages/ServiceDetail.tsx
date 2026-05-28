@@ -18,15 +18,28 @@ export function ServiceDetailPage() {
   if (!service) return <div className="pt-24 min-h-screen flex items-center justify-center"><div className="text-red-400">Service not found</div></div>;
 
   return (
-    <div className="pt-24">
-      <section className="py-20 bg-gradient-to-b from-dark-900 to-dark-950">
-        <div className="max-w-7xl mx-auto px-4">
+    <div className="pt-20">
+      {/* Hero Banner with Image */}
+      <section className="relative h-[420px] overflow-hidden">
+        {service.hero_image ? (
+          <>
+            <img
+              src={service.hero_image}
+              alt={service.name}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-dark-900/95 via-dark-900/80 to-dark-900/50" />
+          </>
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-b from-dark-900 to-dark-950" />
+        )}
+        <div className="relative z-10 max-w-7xl mx-auto px-4 h-full flex flex-col justify-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <nav className="text-sm text-dark-400 mb-4">
               <Link to="/" className="hover:text-gold-400">Home</Link> / <Link to="/services" className="hover:text-gold-400">Services</Link> / <span className="text-white">{service.name}</span>
             </nav>
             <h1 className="text-4xl sm:text-5xl font-display font-bold text-white">{service.name}</h1>
-            <p className="text-dark-400 mt-4 max-w-2xl">{service.short_description}</p>
+            <p className="text-dark-300 mt-4 max-w-2xl text-lg">{service.short_description}</p>
             {service.price_range_min && (
               <div className="mt-4 text-gold-400 text-lg font-semibold">
                 {formatCurrency(service.price_range_min)} — {formatCurrency(service.price_range_max!)} {service.price_unit}
@@ -36,6 +49,7 @@ export function ServiceDetailPage() {
         </div>
       </section>
 
+      {/* Main Content */}
       <section className="py-16 bg-dark-900">
         <div className="max-w-7xl mx-auto px-4 grid lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2">
@@ -71,6 +85,20 @@ export function ServiceDetailPage() {
               </div>
             )}
 
+            {/* Gallery */}
+            {service.gallery && service.gallery.length > 0 && (
+              <div className="mt-10">
+                <h3 className="text-xl font-display font-bold text-white mb-4">Gallery</h3>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  {service.gallery.map((img: string, idx: number) => (
+                    <div key={idx} className="rounded-xl overflow-hidden aspect-video">
+                      <img src={img} alt={`${service.name} gallery ${idx + 1}`} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300" loading="lazy" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             {service.faqs && service.faqs.length > 0 && (
               <div className="mt-10">
                 <h3 className="text-xl font-display font-bold text-white mb-4">FAQs</h3>
@@ -88,6 +116,12 @@ export function ServiceDetailPage() {
 
           {/* Sidebar */}
           <div className="space-y-6">
+            {/* Hero image card */}
+            {service.hero_image && (
+              <div className="rounded-2xl overflow-hidden border border-dark-700/50">
+                <img src={service.hero_image} alt={service.name} className="w-full aspect-[4/3] object-cover" />
+              </div>
+            )}
             <div className="p-6 rounded-2xl bg-dark-800/50 border border-dark-700/50 sticky top-28">
               <h3 className="text-lg font-display font-bold text-white mb-4">Get Started</h3>
               <div className="space-y-3">

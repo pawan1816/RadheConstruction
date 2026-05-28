@@ -1,0 +1,130 @@
+- generic [ref=e2]:
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "B BuildRanchi Pro Construction" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e6]: B
+        - generic [ref=e7]:
+          - generic [ref=e8]: BuildRanchi
+          - generic [ref=e9]: Pro Construction
+      - navigation [ref=e10]:
+        - link "Home" [ref=e11] [cursor=pointer]:
+          - /url: /
+        - link "About" [ref=e12] [cursor=pointer]:
+          - /url: /about
+        - link "Services" [ref=e13] [cursor=pointer]:
+          - /url: /services
+        - link "Projects" [ref=e14] [cursor=pointer]:
+          - /url: /projects
+        - link "Blog" [ref=e15] [cursor=pointer]:
+          - /url: /blog
+        - link "Contact" [ref=e16] [cursor=pointer]:
+          - /url: /contact
+      - generic [ref=e17]:
+        - link "WhatsApp" [ref=e18] [cursor=pointer]:
+          - /url: https://wa.me/916203277096?text=Hello!%20I%20am%20interested%20in%20your%20construction%20services.
+          - img [ref=e19]
+          - text: WhatsApp
+        - link "Get Free Quote" [ref=e21] [cursor=pointer]:
+          - /url: /quotation
+  - main [ref=e22]:
+    - generic [ref=e26]:
+      - text: Our Services
+      - heading "Premium Construction Services" [level=1] [ref=e27]
+      - paragraph [ref=e28]: Comprehensive construction, design, and real estate solutions in Ranchi, Jharkhand.
+  - contentinfo [ref=e30]:
+    - generic [ref=e32]:
+      - generic [ref=e33]:
+        - link "B BuildRanchi" [ref=e34] [cursor=pointer]:
+          - /url: /
+          - generic [ref=e35]: B
+          - generic [ref=e36]: BuildRanchi
+        - paragraph [ref=e37]: Building Dreams, Constructing Reality. Premium construction and real estate services in Ranchi, Jharkhand since 2009.
+        - generic [ref=e38]:
+          - link "+91 7258021382 / +91 6203277096" [ref=e39] [cursor=pointer]:
+            - /url: tel:+917258021382
+            - img [ref=e40]
+            - text: +91 7258021382 / +91 6203277096
+          - link "paikpawan18@gmail.com" [ref=e42] [cursor=pointer]:
+            - /url: mailto:paikpawan18@gmail.com
+            - img [ref=e43]
+            - text: paikpawan18@gmail.com
+          - generic [ref=e45]:
+            - img [ref=e46]
+            - generic [ref=e48]: Dhurva, Ranchi, Jharkhand
+        - generic [ref=e49]:
+          - link [ref=e50] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e51]
+          - link [ref=e53] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e54]
+          - link [ref=e56] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e57]
+          - link [ref=e59] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e60]
+          - link [ref=e62] [cursor=pointer]:
+            - /url: https://wa.me/916203277096
+            - img [ref=e63]
+      - generic [ref=e65]:
+        - heading "Services" [level=4] [ref=e66]
+        - list [ref=e67]:
+          - listitem [ref=e68]:
+            - link "Residential Construction" [ref=e69] [cursor=pointer]:
+              - /url: /services/residential-construction
+          - listitem [ref=e70]:
+            - link "Commercial Construction" [ref=e71] [cursor=pointer]:
+              - /url: /services/commercial-construction
+          - listitem [ref=e72]:
+            - link "Interior Design" [ref=e73] [cursor=pointer]:
+              - /url: /services/interior-design
+          - listitem [ref=e74]:
+            - link "Villa Construction" [ref=e75] [cursor=pointer]:
+              - /url: /services/villa-construction
+          - listitem [ref=e76]:
+            - link "Renovation" [ref=e77] [cursor=pointer]:
+              - /url: /services/renovation
+          - listitem [ref=e78]:
+            - link "Architecture Planning" [ref=e79] [cursor=pointer]:
+              - /url: /services/architecture-planning
+      - generic [ref=e80]:
+        - heading "Company" [level=4] [ref=e81]
+        - list [ref=e82]:
+          - listitem [ref=e83]:
+            - link "About Us" [ref=e84] [cursor=pointer]:
+              - /url: /about
+          - listitem [ref=e85]:
+            - link "Our Projects" [ref=e86] [cursor=pointer]:
+              - /url: /projects
+          - listitem [ref=e87]:
+            - link "Blog" [ref=e88] [cursor=pointer]:
+              - /url: /blog
+          - listitem [ref=e89]:
+            - link "Contact" [ref=e90] [cursor=pointer]:
+              - /url: /contact
+          - listitem [ref=e91]:
+            - link "Careers" [ref=e92] [cursor=pointer]:
+              - /url: /careers
+      - generic [ref=e93]:
+        - heading "Quick Links" [level=4] [ref=e94]
+        - list [ref=e95]:
+          - listitem [ref=e96]:
+            - link "Get Free Quote" [ref=e97] [cursor=pointer]:
+              - /url: /quotation
+          - listitem [ref=e98]:
+            - link "Book Consultation" [ref=e99] [cursor=pointer]:
+              - /url: /booking
+          - listitem [ref=e100]:
+            - link "FAQs" [ref=e101] [cursor=pointer]:
+              - /url: /contact#faqs
+          - listitem [ref=e102]:
+            - link "Privacy Policy" [ref=e103] [cursor=pointer]:
+              - /url: /privacy
+          - listitem [ref=e104]:
+            - link "Terms & Conditions" [ref=e105] [cursor=pointer]:
+              - /url: /terms
+    - generic [ref=e107]:
+      - paragraph [ref=e108]: © 2026 BuildRanchi Pro. All rights reserved.
+      - paragraph [ref=e109]: Premium Construction & Real Estate • Ranchi, Jharkhand, India

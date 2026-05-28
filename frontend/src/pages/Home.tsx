@@ -179,20 +179,29 @@ function ServicesSection() {
             <motion.div key={service.id} variants={fadeInUp}>
               <Link
                 to={`/services/${service.slug}`}
-                className="group block p-6 rounded-2xl bg-dark-800/50 border border-dark-700/50 hover:border-gold-500/30 hover:bg-dark-800 transition-all duration-300 h-full"
+                className="group block rounded-2xl bg-dark-800/50 border border-dark-700/50 hover:border-gold-500/30 hover:bg-dark-800 transition-all duration-300 h-full overflow-hidden"
               >
-                <div className="w-14 h-14 bg-gold-500/10 rounded-xl flex items-center justify-center text-gold-500 mb-4 group-hover:bg-gold-500/20 transition-colors">
-                  {iconMap[service.name] || <FaBuilding className="text-2xl" />}
+                <div className="relative h-36 overflow-hidden">
+                  {service.hero_image ? (
+                    <img src={service.hero_image} alt={service.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" loading="lazy" />
+                  ) : (
+                    <div className="w-full h-full bg-dark-700 flex items-center justify-center">
+                      {iconMap[service.name] || <FaBuilding className="text-4xl text-dark-600" />}
+                    </div>
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-dark-900/80 via-transparent to-transparent" />
                 </div>
-                <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-gold-400 transition-colors">
-                  {service.name}
-                </h3>
-                <p className="text-dark-400 text-sm line-clamp-2">{service.short_description}</p>
-                {service.price_range_min && (
-                  <div className="mt-3 text-gold-400 text-sm font-medium">
-                    {formatCurrency(service.price_range_min!)} - {formatCurrency(service.price_range_max!)} {service.price_unit}
-                  </div>
-                )}
+                <div className="p-5">
+                  <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-gold-400 transition-colors">
+                    {service.name}
+                  </h3>
+                  <p className="text-dark-400 text-sm line-clamp-2">{service.short_description}</p>
+                  {service.price_range_min && (
+                    <div className="mt-3 text-gold-400 text-sm font-medium">
+                      {formatCurrency(service.price_range_min!)} - {formatCurrency(service.price_range_max!)} {service.price_unit}
+                    </div>
+                  )}
+                </div>
               </Link>
             </motion.div>
           ))}
