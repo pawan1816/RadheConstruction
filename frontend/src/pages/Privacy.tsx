@@ -1,28 +1,31 @@
 import { motion } from 'framer-motion';
 import { FaShieldAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-
-const SECTION_CLS = 'mb-10';
-const HEADING_CLS = 'text-xl font-display font-bold text-white mb-3';
-const BODY_CLS = 'text-dark-300 text-sm leading-relaxed space-y-3';
-const LIST_CLS = 'list-disc list-inside text-dark-300 text-sm leading-relaxed space-y-1 ml-2';
+import { useThemeStore } from '../stores/themeStore';
 
 export default function PrivacyPolicy() {
+  const { theme } = useThemeStore();
+  const dk = theme === 'dark';
+  const SECTION_CLS = 'mb-10';
+  const HEADING_CLS = `text-xl font-display font-bold mb-3 ${dk ? 'text-white' : 'text-dark-900'}`;
+  const BODY_CLS = `text-sm leading-relaxed space-y-3 ${dk ? 'text-dark-300' : 'text-dark-600'}`;
+  const LIST_CLS = `list-disc list-inside text-sm leading-relaxed space-y-1 ml-2 ${dk ? 'text-dark-300' : 'text-dark-600'}`;
+
   return (
     <div className="pt-24">
       {/* Hero */}
-      <section className="py-16 bg-gradient-to-b from-dark-900 to-dark-950">
+      <section className={`py-16 ${dk ? 'bg-gradient-to-b from-dark-900 to-dark-950' : 'bg-gradient-to-b from-dark-50 to-white'}`}>
         <div className="max-w-4xl mx-auto px-4 text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <FaShieldAlt className="text-gold-500 text-4xl mx-auto mb-4" />
-            <h1 className="text-3xl sm:text-4xl font-display font-bold text-white">Privacy Policy</h1>
-            <p className="text-dark-400 mt-3">Effective Date: January 1, 2025 &nbsp;|&nbsp; Last Updated: May 27, 2025</p>
+            <h1 className={`text-3xl sm:text-4xl font-display font-bold ${dk ? 'text-white' : 'text-dark-900'}`}>Privacy Policy</h1>
+            <p className={`mt-3 ${dk ? 'text-dark-400' : 'text-dark-500'}`}>Effective Date: January 1, 2025 &nbsp;|&nbsp; Last Updated: May 27, 2025</p>
           </motion.div>
         </div>
       </section>
 
       {/* Content */}
-      <section className="py-16 bg-dark-900">
+      <section className={`py-16 ${dk ? 'bg-dark-900' : 'bg-white'}`}>
         <div className="max-w-4xl mx-auto px-4">
 
           <div className={SECTION_CLS}>
@@ -204,25 +207,25 @@ export default function PrivacyPolicy() {
             <h2 className={HEADING_CLS}>14. Grievance Officer</h2>
             <div className={BODY_CLS}>
               <p>As required under Rule 11 of the IT (Reasonable Security Practices) Rules, 2011, our Grievance Officer can be contacted at:</p>
-              <div className="mt-3 p-4 bg-dark-800 rounded-xl border border-dark-700 text-sm">
-                <p className="text-white font-semibold">BuildRanchi Pro — Grievance Officer</p>
-                <p className="text-dark-300 mt-1">Dhurva, Ranchi, Jharkhand 834009, India</p>
-                <p className="text-dark-300">Email: <strong className="text-gold-400">paikpawan18@gmail.com</strong></p>
-                <p className="text-dark-300">Phone: <strong className="text-gold-400">+91 7258021382</strong></p>
-                <p className="text-dark-300 mt-1">Response time: Within 30 working days of receiving a complaint.</p>
-              </div>
-            </div>
-          </div>
+<div className={`mt-3 p-4 rounded-xl border text-sm ${dk ? 'bg-dark-800 border-dark-700' : 'bg-dark-50 border-dark-200'}`}>
+	                <p className={`font-semibold ${dk ? 'text-white' : 'text-dark-900'}`}>BuildRanchi Pro — Grievance Officer</p>
+	                <p className={`mt-1 ${dk ? 'text-dark-300' : 'text-dark-600'}`}>Dhurva, Ranchi, Jharkhand 834009, India</p>
+	                <p className={dk ? 'text-dark-300' : 'text-dark-600'}>Email: <strong className="text-gold-600">paikpawan18@gmail.com</strong></p>
+	                <p className={dk ? 'text-dark-300' : 'text-dark-600'}>Phone: <strong className="text-gold-600">+91 7258021382</strong></p>
+	                <p className={`mt-1 ${dk ? 'text-dark-300' : 'text-dark-600'}`}>Response time: Within 30 working days of receiving a complaint.</p>
+	              </div>
+	            </div>
+	          </div>
 
-          {/* Navigation */}
-          <div className="flex flex-col sm:flex-row gap-4 mt-12 pt-8 border-t border-dark-700">
-            <Link to="/terms" className="px-6 py-3 bg-dark-800 text-gold-400 rounded-xl font-bold hover:bg-dark-700 transition-colors border border-dark-700 text-center">
-              Read Terms &amp; Conditions →
-            </Link>
-            <Link to="/contact" className="px-6 py-3 bg-dark-800 text-white rounded-xl font-bold hover:bg-dark-700 transition-colors border border-dark-700 text-center">
-              Contact Us
-            </Link>
-          </div>
+	          {/* Navigation */}
+	          <div className={`flex flex-col sm:flex-row gap-4 mt-12 pt-8 border-t ${dk ? 'border-dark-700' : 'border-dark-200'}`}>
+	            <Link to="/terms" className={`px-6 py-3 rounded-xl font-bold transition-colors text-center border ${dk ? 'bg-dark-800 text-gold-400 border-dark-700 hover:bg-dark-700' : 'bg-dark-50 text-gold-600 border-dark-200 hover:bg-dark-100'}`}>
+	              Read Terms &amp; Conditions →
+	            </Link>
+	            <Link to="/contact" className={`px-6 py-3 rounded-xl font-bold transition-colors text-center border ${dk ? 'bg-dark-800 text-white border-dark-700 hover:bg-dark-700' : 'bg-dark-50 text-dark-900 border-dark-200 hover:bg-dark-100'}`}>
+	              Contact Us
+	            </Link>
+	          </div>
         </div>
       </section>
     </div>

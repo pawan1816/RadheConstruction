@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaFileAlt, FaCheck, FaWhatsapp, FaMapMarkerAlt, FaTimes, FaImage, FaFilePdf } from 'react-icons/fa';
 import { endpoints } from '../api';
+import { useThemeStore } from '../stores/themeStore';
 import { Link } from 'react-router-dom';
 import type { Service } from '../types';
 
@@ -24,9 +25,7 @@ const LOCATIONS = [
   'Kokar', 'Ashok Nagar', 'Argora', 'Birla Area', 'Other',
 ];
 
-const inputCls = 'w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-xl text-white placeholder-dark-500 focus:outline-none focus:border-gold-500 transition-colors';
-const labelCls = 'block text-white text-sm font-medium mb-2';
-const selectCls = 'w-full px-4 py-3 bg-dark-800 border border-dark-700 rounded-xl text-white focus:outline-none focus:border-gold-500 transition-colors';
+
 
 function formatSize(bytes: number): string {
   if (bytes < 1024) return `${bytes} B`;
@@ -55,6 +54,11 @@ interface FormState {
 }
 
 export default function QuotationPage() {
+  const { theme } = useThemeStore();
+  const dk = theme === 'dark';
+  const inputCls = `w-full px-4 py-3 rounded-xl focus:outline-none focus:border-gold-500 transition-colors ${dk ? 'bg-dark-800 border border-dark-700 text-white placeholder-dark-500' : 'bg-white border border-dark-200 text-dark-900 placeholder-dark-400'}`;
+  const labelCls = `block text-sm font-medium mb-2 ${dk ? 'text-white' : 'text-dark-900'}`;
+  const selectCls = `w-full px-4 py-3 rounded-xl focus:outline-none focus:border-gold-500 transition-colors ${dk ? 'bg-dark-800 border border-dark-700 text-white' : 'bg-white border border-dark-200 text-dark-900'}`;
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [services, setServices] = useState<Service[]>([]);
