@@ -13,3 +13,5 @@ django-celery-beat>=2.6
 drf-spectacular>=0.28
 python-dotenv>=1.0
 reportlab>=4.2
+dj-database-url>=2.1
+psycopg2-binary>=2.9
